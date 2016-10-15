@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<h2>Latest reviews</h2>
+
+<head>
+    <title>Latest Reviews</title>
+</head>
+{% endblock %}
+
+{% block content %}
+{% if latest_review_list %}
+<div class="row">
+    {% for review, image in latest_review_list %}
+    <div class="col-xs-6 col-lg-4">
+        <img src="{{ MEDIA_URL }}{{ image }}" class="img-fluid" alt="Responsive image"/>
+        <h4><a href="{% url 'reviews:edit_review_form' review.id %}"/>Edit</a>
+        {{review.wine.vintage }} {{ review.wine.producer}} {{ review.wine.name }}
+        </h4>
+        <h5><a href="{% url 'reviews:delete_review' review.id %}"/>Delete</a></h5>
+        <h6>rated {{ review.rating }} of 20 by <a href="{% url 'reviews:user_review_list' review.user_name %}" >{{ review.user_name }}</a></h6>
+        <p>{{ review.comment }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>No reviews are available.</p>
+{% endif %}
+{% endblock %}

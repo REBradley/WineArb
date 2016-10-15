@@ -14,6 +14,7 @@ import environ
 
 ROOT_DIR = environ.Path(__file__) - 3  # (winearb/config/settings/common.py - 3 = winearb/)
 APPS_DIR = ROOT_DIR.path('winearb')
+BASE_TEMPLATE_DIR = ROOT_DIR.path('templates')
 
 env = environ.Env()
 
@@ -39,6 +40,7 @@ THIRD_PARTY_APPS = (
     'allauth',  # registration
     'allauth.account',  # registration
     'allauth.socialaccount',  # registration
+    'bootstrap3',
 )
 
 # Apps specific for this project go here.
@@ -46,6 +48,8 @@ LOCAL_APPS = (
     # custom users app
     'winearb.users.apps.UsersConfig',
     # Your stuff: custom apps go here
+    'winearb.reviews.apps.ReviewsConfig',
+    'winearb.upload_handling.apps.UploadHandlingConfig',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -99,10 +103,15 @@ MANAGERS = ADMINS
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
-    'default': env.db('DATABASE_URL', default='postgres:///winearb'),
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'winearb',
+        'USER': 'robert',
+        'PASSWORD': 'Kona32323',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
 }
-DATABASES['default']['ATOMIC_REQUESTS'] = True
-
 
 # GENERAL CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -136,6 +145,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
         'DIRS': [
+            #BASE_TEMPLATE_DIR,
             str(APPS_DIR.path('templates')),
         ],
         'OPTIONS': {
@@ -192,6 +202,8 @@ MEDIA_ROOT = str(APPS_DIR('media'))
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
 MEDIA_URL = '/media/'
+
+MAX_UPLOAD_SIZE = "5242880"
 
 # URL Configuration
 # ------------------------------------------------------------------------------
