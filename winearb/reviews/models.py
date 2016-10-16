@@ -66,7 +66,7 @@ class Review(TimeStampedModel):
 
     wine = models.ForeignKey(Wine, blank=True, null=True)
     user_name = models.CharField(max_length=100)
-    comment = models.CharField(max_length=200)
+    comment = models.CharField(max_length=999)
     rating = models.IntegerField(choices=RATING_CHOICES, default=10)
 
     def __str__(self):
