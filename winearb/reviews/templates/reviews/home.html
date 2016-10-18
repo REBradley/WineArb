@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
-{% load bootstrap3 %}
+{% load static i18n %}
 
 {% block content %}
-<form action="{% url 'reviews:new_review'%}" method="post" class="form" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{image_form.as_p}}
-    {{form.as_p}}
-    {% buttons %}
-    <button type="submit" class="btn btn-danger btn-block" value="Upload">
-        {% bootstrap_icon "star" %} Add
-    </button>
-    {% endbuttons %}
-</form>
+<div class="container-fluid">
+  <div class="form-inline">
+    <form action="{% url 'reviews:new_review'%}" method="post" class="form" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{image_form.as_p}}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-danger btn-block" value="Upload">Save
+        </button>
+    </form>
+  </div>
+</div>
 {% endblock %}

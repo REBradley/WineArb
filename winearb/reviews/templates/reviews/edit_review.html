@@ -2,6 +2,8 @@
 {% load bootstrap3 %}
 
 {% block content %}
+{{ associated_image }}
+<img src="{{ MEDIA_URL }}{{ image }}" class="img-fluid" alt="Responsive image"/>
 <form action="{% url 'reviews:edit_review' review.id %}" method="post" class="form" enctype="multipart/form-data">
     {% csrf_token %}
     {{image_form.as_p}}

@@ -9,9 +9,7 @@ class ReviewImageForm(ModelForm):
     class Meta:
         model = WineImage
         fields = ['shot',]
-        labels = {
-            'shot': _('Upload Bottle'),
-        }
+
 
         # Not Working
 
@@ -31,16 +29,11 @@ class ReviewForm(ModelForm):
 
     class Meta:
         model = Review
-
         fields = ['rating', 'comment',]
         widgets = {
             'comment': Textarea(attrs=dict(cols=40,
                                            rows=15,
                                            placeholder='What did you think of this Wine?')),
-        }
-        labels = {
-            'comment': _('Tasting Note'),
-            'rating': _('Rate It'),
         }
 
         #Don't Work

@@ -3,12 +3,20 @@
 {% block title %}
 <h2><a href="{% url 'reviews:wine_detail' review.wine.id %}"> {{review.wine.vintage }} {{ review.wine.producer}} {{ review.wine.name }} </a></h2>
 <head>
-    
+
     <title>Review Details</title>
 </head>
 {% endblock %}
 
 {% block content %}
+<div class="row">
+            <div class="col-xs-2">
+            <p><a href="{% url 'reviews:edit_review_form' review.id %}"/>Edit</p>
+            </div>
+            <div class="col-xs-2">
+            <p><a href="{% url 'reviews:delete_review' review.id %}"/> Delete</p>
+            </div>
+</div>
 <h4>Rated {{ review.rating }} of 20 by <a href="{% url 'reviews:user_review_list' review.user_name %}" >{{ review.user_name }}</a></h4>
 <p>{{ review.pub_date }}</p>
 <p>{{ review.comment }}</p>

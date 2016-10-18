@@ -114,8 +114,8 @@ def user_reccommendation_list(request):
 
 #################
 def new_wine(request):
-    form = ReviewForm()
-    image_form = ReviewImageForm()
+    form = ReviewForm(auto_id=False)
+    image_form = ReviewImageForm(auto_id=False)
     return render(request, 'reviews/home.html', {'form': form, 'image_form': image_form,})
 
 @login_required
@@ -167,12 +167,12 @@ def edit_review_form(request, review_id):
     submitted_review = get_object_or_404(Review, pk=review_id)
     associated_image = get_object_or_404(WineImage, review=submitted_review)
     review_edit_form = ReviewForm(instance=submitted_review)
-    review_image_form = ReviewImageForm(instance=associated_image)
+    #review_image_form = ReviewImageForm(instance=associated_image)
 
     return render(request,
                   'reviews/edit_review.html',
-                  {'form': review_edit_form,
-                   'image_form': review_image_form,
+                  {'form': review_edit_form,     #'image_form': review_image_form,
+                   'image': associated_image,
                    'review': submitted_review})
 
 @login_required
