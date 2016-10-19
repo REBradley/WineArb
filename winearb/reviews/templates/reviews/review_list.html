@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %}
 <h2>Latest reviews</h2>
@@ -10,22 +11,34 @@
 
 {% block content %}
 {% if latest_review_list %}
+
+
+<div class="container-fluid m-b-1">
+  <div class="form-horizontal">
+    <form action="" method="get">
+            {{ filter.form|crispy }}
+            <button type="submit" class="btn btn-danger btn-block">Filter
+    </form>
+  </div>
+</div>
+
+
 <div class="container-fluid">
     {% for review, image in latest_review_list %}
     <div class="row m-y-1">
         <div class="col-xs-2 text-xs-center">
           <img src="{{ MEDIA_URL }}{{ image }}" class="img-fluid img-rounded" alt="Responsive image"/>
         </div>
-        <div class="col-xs-9 text-xs-center">
+        <div class="col-xs-8 text-xs-center">
             {% if review.wine.producer != review.wine.name %}
                 <h5>{{ review.wine.producer}}</h5><br>
-                <h6>{{review.wine.vintage }} {{ review.wine.name }}</h6>
+                <a href="{% url 'reviews:wine_detail' review.id %}"><h6>{{review.wine.vintage }} {{ review.wine.name }}</h6></a>
             {% else %}
-                <h5>{{review.wine.vintage }} {{ review.wine.producer}}</h5>
+                <a href="{% url 'reviews:wine_detail' review.id %}"><h5>{{review.wine.vintage }} {{ review.wine.producer}}</h5></a>
             {% endif %}
             <p>{{review.wine.appellation }}</p>
         </div>
-        <div class="col-xs-1">
+        <div class="col-xs-2">
           {% if review.rating >= 15 %}
             <h6 class="text-success">{{ review.rating }}/20</h6>
           {% elif review.rating <= 5 %}
@@ -36,8 +49,25 @@
         </div>
     </div>
     {% endfor %}
+    <div class="pagination m-x-auto">
+      <span class="step-links">
+
+        {% if latest_review_list.has_previous %}
+          <a href="?page={{ latest_review_list.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+          page {{ latest_review_list.number }} of {{ latest_review_list.paginator.num_pages }}
+        </span>
+
+        {% if latest_review_list.has_next %}
+            <a href="?page={{ latest_review_list.next_page_number }}">next</a>
+        {% endif %}
+      </span>
+    </div>
 </div>
 {% else %}
 <p>No reviews are available.</p>
 {% endif %}
+
 {% endblock %}

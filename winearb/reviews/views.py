@@ -1,10 +1,14 @@
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-from ..users.models import User
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
+
+from winearb.users.models import User
 from .models import Review, Wine, Cluster
-from ..upload_handling.models import WineImage
+from winearb.upload_handling.models import WineImage
 from .forms import ReviewForm, ReviewImageForm
+from winearb.core.filters import ReviewFilter
 
 import datetime
 
@@ -30,11 +34,6 @@ def wine_list(request):
     context = {'wine_list' :wine_list}
     return render (request, 'reviews/wine_list.html', context)
 
-def wine_detail(request, wine_id):
-    wine = get_object_or_404(Wine, pk=wine_id)
-    form = ReviewForm()
-    image_form = ReviewImageForm()
-    return render(request, 'reviews/wine_detail.html', {'wine': wine, 'form': form, 'image_form': image_form,})
 
 
 #@login_required
@@ -114,8 +113,8 @@ def user_reccommendation_list(request):
 
 #################
 def new_wine(request):
-    form = ReviewForm(auto_id=False)
-    image_form = ReviewImageForm(auto_id=False)
+    form = ReviewForm(auto_id='')
+    image_form = ReviewImageForm(auto_id='')
     return render(request, 'reviews/home.html', {'form': form, 'image_form': image_form,})
 
 @login_required
@@ -227,8 +226,29 @@ def user_review_list(request, username=None):
                                                 ).order_by(
                                                     '-created'
                                                 )
+    review_filter = ReviewFilter(request.GET, queryset=latest_review_list)
 
-    review_images = list(map(lambda x: x.wineimages.get(review=x), latest_review_list))
-    latest_review_list_with_images = zip(latest_review_list, review_images)
-    context = {'latest_review_list':latest_review_list_with_images, 'username':username}
+    review_images = list(map(lambda x: x.wineimages.get(review=x), review_filter))
+    latest_review_list_with_images = zip(review_filter, review_images)
+
+    paginator = Paginator(latest_review_list_with_images,10)
+
+    page = request.GET.get('page')
+    try:
+        latest_review_list_with_images = paginator.page(page)
+    except PageNotAnInteger:
+        latest_review_list_with_images = paginator.page(1)
+    except EmptyPage:
+        latest_review_list_with_images = paginator.page(paginator.num_pages)
+
+    context = {'latest_review_list':latest_review_list_with_images, 'username':username, 'filter': review_filter}
     return render(request, 'reviews/user_review_list.html', context)
+
+
+def wine_detail(request, review_id, username=None):
+    if not username:
+        username = request.user.username
+    review = get_object_or_404(Review, pk=review_id)
+    wine = review.wine
+    image = review.wineimages.get(review=review)
+    return render(request, 'reviews/wine_detail.html', {'wine': wine, 'review': review, 'image': image})

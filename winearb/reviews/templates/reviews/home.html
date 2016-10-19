@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 {% load static i18n %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-<div class="container-fluid">
-  <div class="form-inline">
-    <form action="{% url 'reviews:new_review'%}" method="post" class="form" enctype="multipart/form-data">
+<div class="container-fluid m-b-1">
+  <div class="form-horizontal">
+    <form action="{% url 'reviews:new_review' %}" method="post" class="form" enctype="multipart/form-data">
         {% csrf_token %}
-        {{image_form.as_p}}
-        {{form.as_p}}
+        {{image_form|crispy}}
+        {{form|crispy}}
         <button type="submit" class="btn btn-danger btn-block" value="Upload">Save
         </button>
     </form>

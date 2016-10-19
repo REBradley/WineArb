@@ -6,7 +6,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from config.settings.common import AUTH_USER_MODEL
 
-from ..core.models import TimeStampedModel
+from winearb.core.models import TimeStampedModel
 
 import numpy as np
 
@@ -52,12 +52,12 @@ class Review(TimeStampedModel):
         (13, '13'),
         (12, '12'),
         (11, '11'),
-        (10, 'Average, considering cost'),
+        (10, 'Average Rating'),
         (9, '9'),
         (8, '8'),
         (7, '7'),
         (6, '6'),
-        (5, 'Not good at this price'),
+        (5, 'Not good'),
         (4, '4'),
         (3, '3'),
         (2, '2'),

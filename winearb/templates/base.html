@@ -29,19 +29,21 @@
 
   <body>
 
-    <div class="m-b-1">
-      <div class="container">
-        <nav class="navbar navbar-light navbar-static-top" style="background-color: rgba(255,255, 255, 0.7);">
-          <div class="container-fluid">
-            <a class="navbar-brand m-b-0" href="{% url 'reviews:home' %}">
-              <img src="{{ STATIC_URL }}images/VIN-ARB.jpg" class="img-fluid" alt="VinArb">
-            </a>
-            <button type="button" class="navbar-toggler hidden-sm-up pull-xs-right"  data-toggle="collapse" data-target="#bs-navbar-collapse-1">
+    <div class="m-y-1 text-xs-center">
+      <div class="container text-xs-center">
+        <nav class="navbar navbar-light navbar-static-top text-xs-center" style="background-color: rgba(255,255, 255, 0.7);">
+          <div class="container-fluid text-xs-center">
+            <div class="container-fluid text-xs-center m-x-auto">
+              <a class="navbar-brand m-l-2 text-xs-center" href="{% url 'reviews:home' %}">
+                <img src="{{ STATIC_URL }}images/VIN-ARB.jpg" class="img-fluid" alt="VinArb">
+              </a>
+            </div>
+            <button type="button" class="navbar-toggler hidden-sm-up text-xs-center"  data-toggle="collapse" data-target="#bs-navbar-collapse-1">
               &#9776;
             </button>
 
             <!-- Collect the nav links, forms, and other content for toggling  -->
-            <div class="collapse navbar-toggleable-xs" id="bs-navbar-collapse-1">
+            <div class="collapse navbar-toggleable-xs text-xs-center" id="bs-navbar-collapse-1">
               <ul class="nav navbar-nav">
                 <!--
                 <li class="nav-item">
@@ -52,7 +54,7 @@
 
               </ul>
 
-              <ul class="nav navbar-nav pull-xs-right">
+              <ul class="nav navbar-nav text-xs-center">
                 {% if request.user.is_authenticated %}
                   <li class="nav-item">
                     <a class="nav-link" href="{% url 'users:detail' request.user.username  %}">Welcome, {{ request.user.name }}</a>

@@ -29,6 +29,9 @@
   }
 }
 
+.asteriskField {
+    display: none;
+}
 
 
 /* Display django-debug-toolbar.
