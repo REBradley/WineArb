@@ -163,14 +163,16 @@ def edit_review_form(request, review_id):
     """
     Edit an existing review.
     """
+    print review_id, 'JJJJJ'
     submitted_review = get_object_or_404(Review, pk=review_id)
     associated_image = get_object_or_404(WineImage, review=submitted_review)
     review_edit_form = ReviewForm(instance=submitted_review)
-    #review_image_form = ReviewImageForm(instance=associated_image)
+
+    print submitted_review,'submitted_review'
 
     return render(request,
                   'reviews/edit_review.html',
-                  {'form': review_edit_form,     #'image_form': review_image_form,
+                  {'form': review_edit_form,
                    'image': associated_image,
                    'review': submitted_review})
 
@@ -179,34 +181,26 @@ def edit_review(request, review_id):
         """
         Return a new review object from the ReviewForm and ReviewImageForm.
         """
-        edited_review = get_object_or_404(Review, pk=review_id)
+
         submitted_review_form = ReviewForm(request.POST)
-        submitted_image_form = ReviewImageForm(files=request.FILES)
 
-        if submitted_review_form.is_valid() and submitted_image_form.is_valid():
+        if submitted_review_form.is_valid():
             edited_review = get_object_or_404(Review, pk=review_id)
-            associated_image = get_object_or_404(WineImage, review=edited_review)
-
-            associated_image.shot = submitted_image_form.cleaned_data['shot']
 
             edited_review.rating = submitted_review_form.cleaned_data['rating']
             edited_review.comment = submitted_review_form.cleaned_data['comment']
 
             edited_review.save()
-            associated_image.save()
-            # update_clusters() #INPROGRESS
-
-
-            # Always return an HttpResponseRedirect after successfully dealing
-            # with POST data. This prevents data from being posted twice if a
-            # user hits the Back button.
 
             return HttpResponseRedirect(reverse('reviews:home'))
 
+
+        edited_review = get_object_or_404(Review, pk=review_id)
+        associated_image = get_object_or_404(WineImage, review=edited_review)
         return render(request,
                       'reviews/edit_review.html',
                       {'form': submitted_review_form,
-                       'image_form': submitted_image_form,
+                       'image': associated_image,
                        'review': edited_review})
 
 @login_required

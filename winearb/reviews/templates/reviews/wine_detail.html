@@ -14,9 +14,17 @@
       <p class="card-text text-xs-center">{{review.comment}}</p>
     </div>
       <ul class="list-group list-group-flush">
-      <li class="list-group-item"><a href="{% url 'reviews:edit_review' review.id%}">Edit</a></li>
-      <li class="list-group-item"><a href="{% url 'reviews:delete_review' review.id%}">Delete</a></li>
+      {% if not wine.secondary_variety%}
+        <li class="list-group-item">{{ wine.dominant_variety}}</li>
+      {% else %}
+        <li class="list-group-item">{{ wine.dominant_variety}}&nbsp;and&nbsp;{{ wine.secondary_variety}}</li>
+      {% endif %}
+      <li class="list-group-item">{{ wine.region }},&nbsp;{{ wine.country}}</li>
     </ul>
+    <div class="card-block">
+      <a href="{% url 'reviews:edit_review_form' review.id%}" class="card-link">Edit</a>&nbsp;or&nbsp;
+      <a href="{% url 'reviews:delete_review' review.id%}">Delete</a>
+    </div>
   </div>
 </div>
 

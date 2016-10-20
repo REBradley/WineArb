@@ -1,17 +1,18 @@
 {% extends 'base.html' %}
-{% load bootstrap3 %}
+{% load static i18n %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-{{ associated_image }}
-<img src="{{ MEDIA_URL }}{{ image }}" class="img-fluid" alt="Responsive image"/>
-<form action="{% url 'reviews:edit_review' review.id %}" method="post" class="form" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{image_form.as_p}}
-    {{form.as_p}}
-    {% buttons %}
-    <button type="submit" class="btn btn-danger btn-block" value="Upload">
-        {% bootstrap_icon "star" %} Add
-    </button>
-    {% endbuttons %}
-</form>
+
+<div class="container-fluid m-b-1">
+  <img src="{{ MEDIA_URL }}{{ image }}" class="img-fluid" alt="Responsive image">
+  <div class="form-horizontal">
+    <form action="{% url 'reviews:edit_review' review.id %}" method="post" class="form" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form|crispy}}
+        <button type="submit" class="btn btn-outline-danger btn-block" value="Upload">Save
+        </button>
+    </form>
+  </div>
+</div>
 {% endblock %}

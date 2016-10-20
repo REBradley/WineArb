@@ -1,4 +1,4 @@
-from winearb.reviews.models import Review, Wine
+from winearb.reviews.models import Review
 
 import django_filters
 

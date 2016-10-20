@@ -33,7 +33,33 @@
     display: none;
 }
 
+@media (min-width: 768px){
+  .navbar-nav{
+      margin: 0 auto;
+      float: none;
+      display: table;
+  }
+}
 
+.navbar-brand {
+    float:none;
+}
+
+.navbar-header {
+    text-align:center;
+    line-height:50px;
+}
+
+body {
+  font-family: 'Cinzel', sans-serif;
+  font-weight: 400; // Corresponds to the Bold 400 style
+}
+
+h1, h2, h3,
+.h1, .h2, .h3{
+  font-family: 'Cinzel', sans-serif;
+  font-weight: 700;
+}
 /* Display django-debug-toolbar.
    See https://github.com/django-debug-toolbar/django-debug-toolbar/issues/742
    and https://github.com/pydanny/cookiecutter-django/issues/317

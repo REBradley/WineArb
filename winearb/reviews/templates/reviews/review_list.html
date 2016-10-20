@@ -17,7 +17,7 @@
   <div class="form-horizontal">
     <form action="" method="get">
             {{ filter.form|crispy }}
-            <button type="submit" class="btn btn-danger btn-block">Filter
+            <button type="submit" class="btn btn-outline-danger btn-block">Filter
     </form>
   </div>
 </div>
@@ -31,8 +31,8 @@
         </div>
         <div class="col-xs-8 text-xs-center">
             {% if review.wine.producer != review.wine.name %}
-                <h5>{{ review.wine.producer}}</h5><br>
-                <a href="{% url 'reviews:wine_detail' review.id %}"><h6>{{review.wine.vintage }} {{ review.wine.name }}</h6></a>
+                <a href="{% url 'reviews:wine_detail' review.id %}"><h5>{{review.wine.vintage }} {{ review.wine.producer}}</h5></a><br>
+                <h6>{{ review.wine.name }}</h6>
             {% else %}
                 <a href="{% url 'reviews:wine_detail' review.id %}"><h5>{{review.wine.vintage }} {{ review.wine.producer}}</h5></a>
             {% endif %}
@@ -42,7 +42,7 @@
           {% if review.rating >= 15 %}
             <h6 class="text-success">{{ review.rating }}/20</h6>
           {% elif review.rating <= 5 %}
-            <h6 class="text-danger">{{ review.rating }}/20</h6>
+            <h6 class="text-muted">{{ review.rating }}/20</h6>
           {% else %}
             <h6>{{ review.rating }}/20</h6>
           {% endif %}

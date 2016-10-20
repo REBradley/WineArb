@@ -39,9 +39,7 @@ THIRD_PARTY_APPS = (
     'crispy_forms',  # Form layouts
     'allauth',  # registration
     'allauth.account',  # registration
-    'allauth.socialaccount',  # registration
-    'bootstrap3',
-    'django_filters',
+    'allauth.socialaccount', # registration
 )
 
 # Apps specific for this project go here.
