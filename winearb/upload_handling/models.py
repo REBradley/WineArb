@@ -33,10 +33,8 @@ class BasicImage(models.Model):
   user = models.ForeignKey(User)
   shot = models.ImageField(upload_to=image_upload_path, validators=[validate_image_size])
 
-
   class Meta:
       abstract=True
-
 
   def __unicode__(self):
     return "%s" % self.shot
@@ -49,7 +47,6 @@ class WineImage(BasicImage):
                              related_name='wineimages')
     review = models.ForeignKey(Review, on_delete=models.CASCADE,
                                related_name='wineimages')
-
 
     def get_upload_path(self, filename):
         return "bottle_shots/%s" % filename

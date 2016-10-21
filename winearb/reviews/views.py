@@ -120,7 +120,7 @@ def new_wine(request):
 @login_required
 def new_review(request):
     """
-    Return a new review object from the ReviewForm and ReviewImageForm.
+    Create and save a new Review object. Create and save a new WineImage object.
     """
     submitted_review_form = ReviewForm(request.POST)
     submitted_image_form = ReviewImageForm(files=request.FILES)
@@ -133,8 +133,7 @@ def new_review(request):
         image = WineImage(shot=uploaded_file,
                           user=request.user,
                           review=new_review)
-                          # Not saved yet
-                          # Therefore not 'validated'
+
 
         rating = submitted_review_form.cleaned_data['rating']
         comment = submitted_review_form.cleaned_data['comment']

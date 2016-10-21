@@ -32,7 +32,7 @@ SECRET_KEY = env('DJANGO_SECRET_KEY')
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # raven sentry client
 # See https://docs.getsentry.com/hosted/clients/python/integrations/django/
-INSTALLED_APPS += ('raven.contrib.django.raven_compat', )
+INSTALLED_APPS += ('', )
 
 # Use Whitenoise to serve static files
 # See: https://whitenoise.readthedocs.io/
@@ -100,9 +100,14 @@ AWS_HEADERS = {
 
 # URL that handles the media served from MEDIA_ROOT, used for managing
 # stored files.
-MEDIA_URL = 'https://s3.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
 
 
+from storages.backends.s3boto import S3BotoStorage
+
+MediaRootS3BotoStorage = lambda: S3BotoStorage(location='media')
+DEFAULT_FILE_STORAGE = 'config.settings.production.MediaRootS3BotoStorage'
+
+MEDIA_URL = '%s.s3.amazonaws.com/media/' % AWS_STORAGE_BUCKET_NAME
 # Static Assets
 # ------------------------
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

@@ -19,8 +19,6 @@ urlpatterns = [
     url(r'^users/', include('winearb.users.urls', namespace='users')),
     url(r'^accounts/', include('allauth.urls')),
 
-    url(r'^accounts/', include('registration.backends.simple.urls')),
-    url('^accounts/', include('django.contrib.auth.urls', namespace="auth")),
 
     # Your stuff: custom urls includes go here
     url(r'^reviews/', include('winearb.reviews.urls', namespace="reviews")),
