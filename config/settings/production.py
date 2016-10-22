@@ -105,7 +105,7 @@ AWS_HEADERS = {
 from storages.backends.s3boto import S3BotoStorage
 
 MediaRootS3BotoStorage = lambda: S3BotoStorage(location='media')
-DEFAULT_FILE_STORAGE = 'config.settings.production.MediaRootS3BotoStorage'
+DEFAULT_FILE_STORAGE = MediaRootS3BotoStorage
 
 MEDIA_URL = '%s.s3.amazonaws.com/media/' % AWS_STORAGE_BUCKET_NAME
 # Static Assets
