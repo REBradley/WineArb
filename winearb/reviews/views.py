@@ -5,7 +5,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 from winearb.users.models import User
-from .models import Review, Wine, Cluster
+from .models import Review, Wine
 from winearb.upload_handling.models import WineImage
 from .forms import ReviewForm, ReviewImageForm
 from winearb.core.filters import ReviewFilter
@@ -20,19 +20,19 @@ from .suggestions import update_clusters
 
 from django.contrib.auth.decorators import login_required
 
-def review_list(request):
-    latest_review_list = Review.objects.order_by('-created') [:9]
-    context = {'latest_review_list' :latest_review_list}
-    return render(request, 'reviews/review_list.html', context)
+#def review_list(request):
+ #   latest_review_list = Review.objects.order_by('-created') [:9]
+#    context = {'latest_review_list' :latest_review_list}
+#    return render(request, 'reviews/review_list.html', context)
 
-def review_detail(request, review_id):
-    review = get_object_or_404(Review, pk=review_id)
-    return render(request, 'reviews/review_detail.html', {'review': review})
+#def review_detail(request, review_id):
+   # review = get_object_or_404(Review, pk=review_id)
+   # return render(request, 'reviews/review_detail.html', {'review': review})
 
-def wine_list(request):
-    wine_list = Wine.objects.order_by('-name')
-    context = {'wine_list' :wine_list}
-    return render (request, 'reviews/wine_list.html', context)
+#def wine_list(request):
+   # wine_list = Wine.objects.order_by('-name')
+   # context = {'wine_list' :wine_list}
+   # return render (request, 'reviews/wine_list.html', context)
 
 
 
@@ -68,7 +68,7 @@ def wine_list(request):
 
   #  return render (request,'reviews/wine_detail.html', {'wine':wine,'form': form})
 
-@login_required
+#@login_required
 def user_reccommendation_list(request):
     # get request user reviewed wines
     user_reviews = Review.objects.filter(user_name=request.user.username).prefetch_related('wine')

@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 
-from .models import Wine, Review, Cluster
+from .models import Wine, Review
 
 class WineAdmin(admin.ModelAdmin):
     model = Wine
@@ -16,12 +16,11 @@ class ReviewAdmin(admin.ModelAdmin):
     list_filter = ['created', 'user_name']
     search_fields = ['comment']
 
-class ClusterAdmin(admin.ModelAdmin):
-    model = Cluster
-    list_display = ['name', 'get_members']
+#class ClusterAdmin(admin.ModelAdmin):
+#    model = Cluster
+#    list_display = ['name', 'get_members']
 
 
 
 admin.site.register(Wine, WineAdmin)
 admin.site.register(Review, ReviewAdmin)
-admin.site.register(Cluster, ClusterAdmin)

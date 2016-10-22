@@ -8,7 +8,6 @@ from config.settings.common import AUTH_USER_MODEL
 
 from winearb.core.models import TimeStampedModel
 
-import numpy as np
 
 class Wine(models.Model):
     vintage = models.PositiveIntegerField(default=2016)
@@ -74,9 +73,9 @@ class Review(TimeStampedModel):
 
 
 
-class Cluster(models.Model):
-    name = models.CharField(max_length=100)
-    users = models.ManyToManyField(AUTH_USER_MODEL)
+#class Cluster(models.Model):
+    #name = models.CharField(max_length=100)
+    #users = models.ManyToManyField(AUTH_USER_MODEL)
 
-    def get_members(self):
-        return "\n".join([u.username for u in self.users.all()])
+    #def get_members(self):
+    #    return "\n".join([u.username for u in self.users.all()])
