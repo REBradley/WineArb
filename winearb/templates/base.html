@@ -30,7 +30,6 @@
   </head>
 
   <body>
-Bobby B!!
     <div class="m-y-1 text-xs-center">
       <div class="container m-x-auto">
         <nav class="navbar navbar-light m-x-auto" style="background-color: rgba(255,255, 255, 0.7);">
@@ -47,11 +46,6 @@ Bobby B!!
             <!-- Collect the nav links, forms, and other content for toggling  -->
             <div class="collapse navbar-toggleable-xs m-x-auto" id="bs-navbar-collapse-1">
               <ul class="nav navbar-nav m-x-auto">
-                <!--
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'reviews:wine_list' %}">All Wines</a>
-                </li>
-                -->
 
 
               </ul>
@@ -65,13 +59,7 @@ Bobby B!!
                     <a class="nav-link" href="{% url 'reviews:user_review_list' user.username %}">My Database</a>
                   </li>
 
-                <!--
 
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'reviews:user_recommendation_list' %}">Suggestions</a>
-                  </li>
-
-                      -->
 
                   <li class="nav-item">
                     <a class="nav-link" href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a>
