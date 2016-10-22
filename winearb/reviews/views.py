@@ -234,7 +234,7 @@ def user_review_list(request, username=None):
         latest_review_list_with_images = paginator.page(paginator.num_pages)
 
     context = {'latest_review_list':latest_review_list_with_images, 'username':username, 'filter': review_filter}
-    return render(request, 'reviews/user_review_list.html', context)
+    return render(request, 'reviews/review_list.html', context)
 
 
 def wine_detail(request, review_id, username=None):
