@@ -12,7 +12,6 @@ from winearb.core.filters import ReviewFilter
 
 import datetime
 
-from .suggestions import update_clusters
 
 #from django.contrib import auth, contenttypes
 #from django.contrib.sessions.middleware import SessionMiddleware
