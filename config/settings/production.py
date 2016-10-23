@@ -106,7 +106,7 @@ AWS_HEADERS = {
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 
-MEDIA_URL = 's3-{1}.amazonaws.com/{0}'.format(AWS_STORAGE_BUCKET_NAME, AWS_REGION)
+MEDIA_URL = 's3-{1}.amazonaws.com/{0}/'.format(AWS_STORAGE_BUCKET_NAME, AWS_REGION)
 # Static Assets
 # ------------------------
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
