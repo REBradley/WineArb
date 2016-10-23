@@ -106,7 +106,7 @@ AWS_HEADERS = {
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 
-MEDIA_URL = '{0}.s3-{1}.amazonaws.com/media/'.format(AWS_STORAGE_BUCKET_NAME, AWS_REGION)
+MEDIA_URL = 's3-{1}.amazonaws.com/{0}/'.format(AWS_STORAGE_BUCKET_NAME, AWS_REGION)
 # Static Assets
 # ------------------------
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -115,7 +115,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # EMAIL
 # ------------------------------------------------------------------------------
 DEFAULT_FROM_EMAIL = env('DJANGO_DEFAULT_FROM_EMAIL',
-                         default='VinArb <noreply@vinarb.com>')
+                         default='VinArb <support@vinarb.com>')
 EMAIL_SUBJECT_PREFIX = env('DJANGO_EMAIL_SUBJECT_PREFIX', default='[VinArb] ')
 SERVER_EMAIL = env('DJANGO_SERVER_EMAIL', default=DEFAULT_FROM_EMAIL)
 
