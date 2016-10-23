@@ -9,7 +9,7 @@
       <h5 class="card-subtitle text-muted">{{ wine.name }}</h5>
       <h6 class="card-title text-xs-right">{{ review.rating}}/20</h6>
     </div>
-    <img src="{{ MEDIA_URL }}{{ image }}" class="img-fluid img-rounded m-x-auto" alt="Responsive image"/>
+    <img src="{{ image.shot.url }}" class="img-fluid img-rounded m-x-auto" alt="Responsive image"/>
     <div class="card-block">
       <p class="card-text text-xs-center">{{review.comment}}</p>
     </div>

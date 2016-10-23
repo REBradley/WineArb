@@ -27,7 +27,7 @@
     {% for review, image in latest_review_list %}
     <div class="row m-y-1">
         <div class="col-xs-2 text-xs-center">
-          <img src="{{ MEDIA_URL }}{{ image }}" class="img-fluid img-rounded" alt="Responsive image"/>
+          <img src="{{ image.shot.url }}" class="img-fluid img-rounded" alt="Responsive image"/>
         </div>
         <div class="col-xs-8 text-xs-center">
             {% if review.wine.producer != review.wine.name %}

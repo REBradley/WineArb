@@ -11,7 +11,7 @@ from PIL import Image as Img
 from ..users.models import User
 from ..reviews.models import Wine, Review
 
-
+#### Helper Functions ###
 def validate_image_size(image):
     file_size = image.file.size
     file_size_in_MB = float(file_size)/float(1024 * 1024)
@@ -29,19 +29,19 @@ def image_upload_path(instance, filename):
   full_path = instance.get_upload_path(shot_path)
   return full_path
 
+### Abstract Image Model ###
 class BasicImage(models.Model):
   user = models.ForeignKey(User)
   shot = models.ImageField(upload_to=image_upload_path, validators=[validate_image_size])
 
   class Meta:
       abstract=True
-
   def __unicode__(self):
     return "%s" % self.shot
 
 
 
-# Required to add new files to a different path
+### Concrete Image Models ###
 class WineImage(BasicImage):
     wine = models.ForeignKey(Wine, null=True, blank=True, on_delete=models.CASCADE,
                              related_name='wineimages')
