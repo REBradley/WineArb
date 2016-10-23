@@ -86,6 +86,7 @@ AWS_STORAGE_BUCKET_NAME = env('DJANGO_AWS_STORAGE_BUCKET_NAME')
 AWS_AUTO_CREATE_BUCKET = False
 AWS_QUERYSTRING_AUTH = False
 AWS_S3_CALLING_FORMAT = OrdinaryCallingFormat()
+AWS_REGION = 'us-west-2'
 
 # AWS cache settings, don't change unless you know what you're doing:
 AWS_EXPIRY = 60 * 60 * 24 * 7
@@ -105,7 +106,7 @@ AWS_HEADERS = {
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 
-MEDIA_URL = '%s.s3.amazonaws.com/media/' % AWS_STORAGE_BUCKET_NAME
+MEDIA_URL = '{0}.s3-{1}.amazonaws.com/media/'.format(AWS_STORAGE_BUCKET_NAME, AWS_REGION)
 # Static Assets
 # ------------------------
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
