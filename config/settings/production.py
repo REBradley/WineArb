@@ -85,6 +85,7 @@ AWS_SECRET_ACCESS_KEY = env('DJANGO_AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = env('DJANGO_AWS_STORAGE_BUCKET_NAME')
 AWS_AUTO_CREATE_BUCKET = False
 AWS_QUERYSTRING_AUTH = False
+AWS_S3_HOST = 's3-us-west-2.amazonaws.com'
 AWS_S3_CALLING_FORMAT = OrdinaryCallingFormat()
 
 
@@ -102,7 +103,7 @@ AWS_HEADERS = {
 # URL that handles the media served from MEDIA_ROOT, used for managing
 # stored files.
 
-from storages.backends.s3boto import S3BotoStorage
+#from storages.backends.s3boto import S3BotoStorage
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 
