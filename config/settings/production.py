@@ -106,7 +106,7 @@ from storages.backends.s3boto import S3BotoStorage
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 
-MEDIA_URL = 's3-us-west-2.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
+MEDIA_URL = 's3-us-west-2.amazonaws.com/%s/bottle_shots/2016/10/' % AWS_STORAGE_BUCKET_NAME
 # Static Assets
 # ------------------------
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
