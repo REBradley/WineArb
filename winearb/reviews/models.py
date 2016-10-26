@@ -1,22 +1,23 @@
 from __future__ import unicode_literals, absolute_import
 
 from django.db import models
-
-# Create your models here.
-from django.contrib.auth.models import User
-from config.settings.common import AUTH_USER_MODEL
+from django.utils.encoding import python_2_unicode_compatible
 
 from winearb.core.models import TimeStampedModel
+from ..users.models import User
 
 
+@python_2_unicode_compatible
 class Wine(models.Model):
+    """Our representation of a wine."""
+
     vintage = models.PositiveIntegerField(default=2016)
     name = models.CharField(max_length=200)
-    producer = models.CharField(max_length=50, default = ' ')
-    country = models.CharField(max_length=50, default = ' ')
-    region = models.CharField(max_length=50, default = ' ')
-    appellation = models.CharField(max_length=50, default = ' ')
-    dominant_variety = models.CharField(max_length=50, default=' ')
+    producer = models.CharField(max_length=50, default='')
+    country = models.CharField(max_length=50, default='')
+    region = models.CharField(max_length=50, default='')
+    appellation = models.CharField(max_length=50, default ='')
+    dominant_variety = models.CharField(max_length=50, default='')
     secondary_variety = models.CharField(max_length=50, default='', blank=True)
     value = models.DecimalField(max_digits=6, decimal_places=2)
     CATEGORY_CHOICES = [
@@ -29,17 +30,20 @@ class Wine(models.Model):
     category = models.CharField(max_length=1, choices=CATEGORY_CHOICES, default = ' ')
     abv = models.DecimalField(max_digits=4, decimal_places=2, default=14)
 
-
-
-
-    def average_rating(self):
-        all_ratings = map(lambda x: x.rating, self.review_set.all())
-        return np.mean(all_ratings)
-
-    def __unicode__(self):
+    def __str__(self):
         return '%s %s %s' % (self.producer, self.name, self.vintage)
 
+@python_2_unicode_compatible
 class Review(TimeStampedModel):
+    """A wine review.
+
+    Stores a reference to:
+        The contributing user
+        Their comment on the particular wine
+        Their numerical rating for the wine
+
+    Wine information is to be entered by admin after the review is submitted.
+    """
     RATING_CHOICES = [
         (20, '20'),
         (19, '19'),
@@ -62,20 +66,10 @@ class Review(TimeStampedModel):
         (2, '2'),
         (1, '1'),
     ]
-
     wine = models.ForeignKey(Wine, blank=True, null=True)
-    user_name = models.CharField(max_length=100)
+    user = models.ForeignKey(User)
     comment = models.CharField(max_length=999)
     rating = models.IntegerField(choices=RATING_CHOICES, default=10)
 
     def __str__(self):
-        return self.user_name + str(self.created)
-
-
-
-#class Cluster(models.Model):
-    #name = models.CharField(max_length=100)
-    #users = models.ManyToManyField(AUTH_USER_MODEL)
-
-    #def get_members(self):
-    #    return "\n".join([u.username for u in self.users.all()])
+        return self.user.username + self.created.strftime("%Y-%m-%d %H:%M:%S")

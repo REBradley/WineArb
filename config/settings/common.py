@@ -44,9 +44,7 @@ THIRD_PARTY_APPS = (
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
-    # custom users app
     'winearb.users.apps.UsersConfig',
-    # Your stuff: custom apps go here
     'winearb.reviews.apps.ReviewsConfig',
     'winearb.upload_handling.apps.UploadHandlingConfig',
 )
@@ -105,8 +103,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'winearb',
-        'USER': 'robert',
-        'PASSWORD': 'Kona32323',
+        'USER': 'root',
+        'PASSWORD': 'Konapiff323',
         'HOST': 'localhost',
         'PORT': '3306',
     }

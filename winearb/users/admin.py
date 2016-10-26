@@ -14,6 +14,7 @@ class MyUserChangeForm(UserChangeForm):
 
 
 class MyUserCreationForm(UserCreationForm):
+    """Adds a clean method to form to prevent duplicate usernames"""
 
     error_message = UserCreationForm.error_messages.update({
         'duplicate_username': 'This username has already been taken.'
@@ -39,4 +40,4 @@ class MyUserAdmin(AuthUserAdmin):
             ('User Profile', {'fields': ('name',)}),
     ) + AuthUserAdmin.fieldsets
     list_display = ('username', 'name', 'is_superuser')
-    search_fields = ['name']
+    search_fields = ['name', 'username', 'email']

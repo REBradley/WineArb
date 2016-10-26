@@ -1,9 +1,11 @@
 from test_plus.test import TestCase
 
 from ..admin import MyUserCreationForm
+from .factories import UserFactory
 
 
 class TestMyUserCreationForm(TestCase):
+    user_factory = UserFactory
 
     def setUp(self):
         self.user = self.make_user('notalamode', 'notalamodespassword')

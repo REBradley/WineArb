@@ -136,9 +136,9 @@ def new_review(request):
 
         rating = submitted_review_form.cleaned_data['rating']
         comment = submitted_review_form.cleaned_data['comment']
-        user_name = request.user.username
+        user = request.user
 
-        new_review.user_name = user_name
+        new_review.user = user
         new_review.rating = rating
         new_review.comment = comment
 
@@ -161,12 +161,9 @@ def edit_review_form(request, review_id):
     """
     Edit an existing review.
     """
-    print review_id, 'JJJJJ'
     submitted_review = get_object_or_404(Review, pk=review_id)
     associated_image = get_object_or_404(WineImage, review=submitted_review)
     review_edit_form = ReviewForm(instance=submitted_review)
-
-    print submitted_review,'submitted_review'
 
     return render(request,
                   'reviews/edit_review.html',
@@ -211,10 +208,11 @@ def delete_review(request, review_id):
 def user_review_list(request, username=None):
     if not username:
         username = request.user.username
+        user= request.user
     latest_review_list = Review.objects.prefetch_related(
                                                     'wineimages'
                                                 ).filter(
-                                                    user_name=username
+                                                    user=user
                                                 ).order_by(
                                                     '-created'
                                                 )

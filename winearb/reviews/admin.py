@@ -12,8 +12,8 @@ class WineAdmin(admin.ModelAdmin):
 
 class ReviewAdmin(admin.ModelAdmin):
     model = Review
-    list_display = ('wine', 'rating', 'comment', 'user_name', 'created', 'modified')
-    list_filter = ['created', 'user_name']
+    list_display = ('wine', 'rating', 'comment', 'user', 'created', 'modified')
+    list_filter = ['created', 'user']
     search_fields = ['comment']
 
 #class ClusterAdmin(admin.ModelAdmin):
