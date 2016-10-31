@@ -22,7 +22,7 @@
 
     <!-- This file stores project-specific CSS -->
     <link href="{% static 'css/project.css' %}" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Cinzel:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:400,700" rel="stylesheet">
 
     {% endblock %}
 
@@ -31,7 +31,7 @@
   <body>
 
 
-    <div class="container">
+    <div class="container-fluid">
 
       {% if messages %}
           {% for message in messages %}
@@ -40,24 +40,25 @@
       {% endif %}
 
       {% block content %}
-      <h1 class="text-xs-center"> About VinArb </h1>
+      <h1 id="about-header" class="text-xs-center"> About VinArb </h1>
 
-      <p class="text-justify">It is important to record our thoughts on wine.<br><br>
+      <p class="text-justify">We know how important it is to record your thoughts when tasting wine.<br><br>
 
 
-      Here, you will find a minimally intrusive platform to record your notes on the wines that you drink:
+      Here, you will find a minimally intrusive platform to record notes and upload your wine photos:
       A database in the cloud.<br><br>
 
       Simply take a picture, rate, comment, and save. Finish enjoying your wine, and when you come back, you'll find your
       review paired with a wine in the database. </p><br>
 
-      <p>Just tap the VinArb logo to add a note!</p><br>
+      <p>Just tap the Database to add a note!</p><br>
 
-      <h4 class="text-xs-right">-Bobby B.</h4>
+      <h4 class="text-xs-right">Bobby B</h4>
       <p class="text-xs-right"><i>Developer</i></a></p>
       <p class="text-xs-left"><a href="{% url 'homepage' %}">Back to Home</a></p>
       {% endblock content %}
 
+    <div id="bottom-border" class="navbar navbar-bottom"></div>
     </div> <!-- /container -->
 
     {% block modal %}{% endblock modal %}

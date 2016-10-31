@@ -12,7 +12,7 @@ from ...reviews.tests.factories import ReviewFactory
 # First is valid, second is over 3Mb
 label_image_list = [
     'https://thewinecountry.com/twcwp/wp-content/uploads/2015/04/chateau-margaux-1982-margaux-bordeaux-300x300.jpg',
-    'http://wineandjurisprudence.org/wp-content/uploads/2013/05/sparkling-wine-labels.jpg',
+    #'http://wineandjurisprudence.org/wp-content/uploads/2013/05/sparkling-wine-labels.jpg',  ### large image
 ]
 
 def get_test_image(url):
@@ -20,6 +20,8 @@ def get_test_image(url):
     get_wine_label = requests.get(url)
     image_file = BytesIO(get_wine_label.content)
     return image_file
+
+test_image = get_test_image(label_image_list[0])
 
 
 class WineImageFactory(factory.django.DjangoModelFactory):

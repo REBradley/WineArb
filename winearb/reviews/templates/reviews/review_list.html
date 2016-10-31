@@ -30,13 +30,17 @@
           <img src="{{ image.shot.url }}" class="img-fluid img-rounded" alt="Responsive image"/>
         </div>
         <div class="col-xs-8 text-xs-center">
-            {% if review.wine.producer != review.wine.name %}
-                <a href="{% url 'reviews:wine_detail' review.id %}"><h5>{{review.wine.vintage }} {{ review.wine.producer}}</h5></a><br>
-                <h6>{{ review.wine.name }}</h6>
-            {% else %}
-                <a href="{% url 'reviews:wine_detail' review.id %}"><h5>{{review.wine.vintage }} {{ review.wine.producer}}</h5></a>
-            {% endif %}
-            <p>{{review.wine.appellation }}</p>
+          {% if review.wine != Null %}
+              {% if review.wine.producer != review.wine.name %}
+                  <a href="{% url 'reviews:wine_detail' review.id %}"><h5>{{review.wine.vintage }} {{ review.wine.producer}}</h5></a><br>
+                  <h6>{{ review.wine.name }}</h6>
+              {% else %}
+                  <a href="{% url 'reviews:wine_detail' review.id %}"><h5>{{review.wine.vintage }} {{ review.wine.producer}}</h5></a>
+              {% endif %}
+              <p>{{review.wine.appellation }}</p>
+          {% else %}
+              <h5>New Wine!</h5>
+          {% endif %}
         </div>
         <div class="col-xs-2">
           {% if review.rating >= 15 %}

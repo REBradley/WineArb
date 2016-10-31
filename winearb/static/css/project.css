@@ -51,15 +51,33 @@
 }
 
 body {
-  font-family: 'Cinzel', sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-weight: 400; // Corresponds to the Bold 400 style
 }
 
 h1, h2, h3,
 .h1, .h2, .h3{
-  font-family: 'Cinzel', sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-weight: 700;
 }
+
+#about-header {
+    background-color: #b22222;
+    margin-top: 0;
+    padding: 20px 20px 10px 20px;
+}
+
+#about-header {
+    color: #ffffff;
+    font-size: 36pt;
+    text-decoration: none;
+}
+
+#bottom-border {
+    background-color: #b22222;
+    margin-top: 0;
+    padding: 20px 20px 10px 20px;
+
 /* Display django-debug-toolbar.
    See https://github.com/django-debug-toolbar/django-debug-toolbar/issues/742
    and https://github.com/pydanny/cookiecutter-django/issues/317

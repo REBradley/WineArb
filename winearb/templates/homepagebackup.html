@@ -1,4 +1,4 @@
-{% load static i18n %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -30,14 +30,14 @@
   </head>
 
   <body>
-    <div class="m-y-2 text-xs-center">
+    <div class="m-y-1 text-xs-center">
       <div class="container m-x-auto">
+         <a class="navbar-brand" href="{% url 'reviews:home' %}">
+           <img src="{{ STATIC_URL }}images/VIN-ARB.gif" class="img-fluid m-x-auto" alt="VinArb">
+         </a>
         <nav class="navbar navbar-light m-x-auto" style="background-color: rgba(255,255, 255, 0.7);">
           <div class="container-fluid m-x-auto">
             <div class="container m-x-auto">
-              <a class="navbar-brand" href="{% url 'reviews:home' %}">
-                <img src="{{ STATIC_URL }}images/VIN-ARB---ICON.gif" class="img-fluid m-x-auto" alt="VinArb">
-              </a>
             </div>
             <button type="button" class="navbar-toggler hidden-sm-up text-xs-center"  data-toggle="collapse" data-target="#bs-navbar-collapse-1">
               &#9776;
@@ -91,6 +91,7 @@
       {% endif %}
 
       {% block content %}
+        <p>Use this document as a way to quick start any new project.</p>
       {% endblock content %}
 
     </div> <!-- /container -->

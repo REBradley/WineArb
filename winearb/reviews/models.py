@@ -11,9 +11,9 @@ from ..users.models import User
 class Wine(models.Model):
     """Our representation of a wine."""
 
-    vintage = models.PositiveIntegerField(default=2016)
-    name = models.CharField(max_length=200)
-    producer = models.CharField(max_length=50, default='')
+    vintage = models.PositiveIntegerField(default=3000)
+    name = models.CharField(max_length=200, default='New Wine!')
+    producer = models.CharField(max_length=50, default='New Wine!')
     country = models.CharField(max_length=50, default='')
     region = models.CharField(max_length=50, default='')
     appellation = models.CharField(max_length=50, default ='')

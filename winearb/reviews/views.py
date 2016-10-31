@@ -1,160 +1,59 @@
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import, unicode_literals
+
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
-
-from winearb.users.models import User
-from .models import Review, Wine
-from winearb.upload_handling.models import WineImage
-from .forms import ReviewForm, ReviewImageForm
-from winearb.core.filters import ReviewFilter
-
-import datetime
-
-
-#from django.contrib import auth, contenttypes
-#from django.contrib.sessions.middleware import SessionMiddleware
-#from django.contrib.auth.middleware import AuthenticationMiddleware, SessionAuthenticationMiddleware
-
 from django.contrib.auth.decorators import login_required
 
-#def review_list(request):
- #   latest_review_list = Review.objects.order_by('-created') [:9]
-#    context = {'latest_review_list' :latest_review_list}
-#    return render(request, 'reviews/review_list.html', context)
+from winearb.upload_handling.models import WineImage
 
-#def review_detail(request, review_id):
-   # review = get_object_or_404(Review, pk=review_id)
-   # return render(request, 'reviews/review_detail.html', {'review': review})
+from winearb.core.filters import ReviewFilter
 
-#def wine_list(request):
-   # wine_list = Wine.objects.order_by('-name')
-   # context = {'wine_list' :wine_list}
-   # return render (request, 'reviews/wine_list.html', context)
+from .models import Review
+from .forms import ReviewForm, ReviewImageForm
+from ..users.models import User
 
 
-
-#@login_required
-#def add_review(request, wine_id):
-    #wine = get_object_or_404(Wine, pk=wine_id)
-    #review_form = ReviewForm(request.POST, request.FILES)
-    #image_form = ReviewImageForm(request.POST, request.FILES)
-    #if review_form.is_valid() and image_form.is_valid():
-
-       # cleaned_rating = review_form.cleaned_data['rating']
-       # cleaned_comment = review_form.cleaned_data['comment']
-       # user_name = request.user.username
-       # review = Review()
-
-        #review.wine = wine
-       # review.user_name = user_name
-       # review.rating = cleaned_rating
-       # review.comment = cleaned_comment
-       # review.save()
-        #update_clusters()
-
-       # image = WineImage(bottle_shot=request.FILES['bottle_shot']) # Not saved yet
-       # image.save()
-
-       # review.bottle_shot = image
-       # review.save()
-        # Always return an HttpResponseRedirect after successfully dealing
-        # with POST data. This prevents data from being posted twice if a
-        # user hits the Back button.
-
-      #  return HttpResponseRedirect(reverse('reviews:wine_detail', args=(wine.id,)))
-
-  #  return render (request,'reviews/wine_detail.html', {'wine':wine,'form': form})
-
-#@login_required
-#def user_reccommendation_list(request):
-    # get request user reviewed wines
-   # user_reviews = Review.objects.filter(user_name=request.user.username).prefetch_related('wine')
-   # user_reviews_wine_ids = set(map(lambda x: x.wine.id, user_reviews))
-
-    # get request user cluster name (just the first one right now)
-   # try:
-   #     user_cluster_name = \
-   #         User.objects.get(username=request.user.username).cluster_set.first().name
-  #  except: #if no cluster has been assigned for a user, update clusters
-  #      update_clusters()
-   #     user_cluster_name = \
-   #         User.objects.get(username=request.user.username).cluster_set.first().name
-
-
-    #get usernames for other members of the cluster
-  #  user_cluster_other_members = \
-   #     Cluster.objects.get(name=user_cluster_name).users \
-   #         .exclude(username=request.user.username).all()
-  #  other_members_usernames = set(map(lambda x: x.username, user_cluster_other_members))
-
-    #get reviews by those users, excluding wines reviewed by the request user
- #   other_users_reviews = \
- #       Review.objects.filter(user_name__in=other_members_usernames) \
- #           .exclude(wine_id__in=user_reviews_wine_ids)
- #   other_users_reviews_wine_ids = set(map(lambda x: x.wine.id, other_users_reviews))
-
-    #Then get a wine list excluding the previous IDs, order by rating
-  #  wine_list = sorted(
-   #     list(Wine.objects.filter(id__in=other_users_reviews_wine_ids)),
-   #     key=lambda x: x.average_rating,
-    #    reverse=True
-
-   # )
-
-   # return render(
-   #     request,
-  #      'reviews/user_recommendation_list.html',
-  #      {'username': request.user.username, 'wine_list': wine_list}
-  #  )
-
-
-#################
 def new_wine(request):
+    """Render a wine review form as the view, with 3 fields.
+    It is composed of 2 forms: One for the comment and rating,
+    the other for a wine image to be uploaded.
+    """
     form = ReviewForm(auto_id='')
     image_form = ReviewImageForm(auto_id='')
     return render(request, 'reviews/home.html', {'form': form, 'image_form': image_form,})
 
 @login_required
 def new_review(request):
-    """
-    Create and save a new Review object. Create and save a new WineImage object.
-    """
+    """Create and save a new Review and an associated WineImage."""
+
     submitted_review_form = ReviewForm(request.POST)
     submitted_image_form = ReviewImageForm(files=request.FILES)
-    print request.FILES['shot'].size
+    user = request.user
+
     if submitted_review_form.is_valid() and submitted_image_form.is_valid():
-        new_review = Review()
-        new_review.save()
-
-        uploaded_file = submitted_image_form.cleaned_data['shot']
-        image = WineImage(shot=uploaded_file,
-                          user=request.user,
-                          review=new_review)
-
 
         rating = submitted_review_form.cleaned_data['rating']
         comment = submitted_review_form.cleaned_data['comment']
-        user = request.user
+        uploaded_file = submitted_image_form.cleaned_data['shot']
 
+        new_review = Review()
         new_review.user = user
         new_review.rating = rating
         new_review.comment = comment
-
         new_review.save()
+
+        image = WineImage(
+                          shot=uploaded_file,
+                          user=user,
+                          review=new_review,
+        )
         image.save()
-        #update_clusters() #INPROGRESS
-
-
-        # Always return an HttpResponseRedirect after successfully dealing
-        # with POST data. This prevents data from being posted twice if a
-        # user hits the Back button.
 
         return HttpResponseRedirect(reverse('reviews:home'))
-
-    return render (request,'reviews/home.html', {'form': submitted_review_form, 'image_form': submitted_image_form})
-
+    return render(request,'reviews/home.html', {'form': submitted_review_form, 'image_form': submitted_image_form})
 
 @login_required
 def edit_review_form(request, review_id):
@@ -173,10 +72,7 @@ def edit_review_form(request, review_id):
 
 @login_required
 def edit_review(request, review_id):
-        """
-        Return a new review object from the ReviewForm and ReviewImageForm.
-        """
-
+        """Return an updated Review from the ReviewForm data; same WineImage."""
         submitted_review_form = ReviewForm(request.POST)
 
         if submitted_review_form.is_valid():
@@ -184,12 +80,10 @@ def edit_review(request, review_id):
 
             edited_review.rating = submitted_review_form.cleaned_data['rating']
             edited_review.comment = submitted_review_form.cleaned_data['comment']
-
             edited_review.save()
 
             return HttpResponseRedirect(reverse('reviews:home'))
-
-
+        # If form was invalid, present it again.
         edited_review = get_object_or_404(Review, pk=review_id)
         associated_image = get_object_or_404(WineImage, review=edited_review)
         return render(request,
@@ -202,11 +96,17 @@ def edit_review(request, review_id):
 def delete_review(request, review_id):
     review_to_delete = get_object_or_404(Review, pk=review_id)
     review_to_delete.delete()
-
     return HttpResponseRedirect(reverse('reviews:home'))
 
 def user_review_list(request, username=None):
-    if not username:
+    """Displays the given user's list of reviewed wines.
+
+    The wine image, name, and rating given by the user are all displayed.
+    There is the option to sort the wine by rating.
+    """
+    if username:
+        user = User.objects.get(username=username)
+    else:
         username = request.user.username
         user= request.user
     latest_review_list = Review.objects.prefetch_related(
@@ -222,7 +122,6 @@ def user_review_list(request, username=None):
     latest_review_list_with_images = zip(review_filter, review_images)
 
     paginator = Paginator(latest_review_list_with_images,10)
-
     page = request.GET.get('page')
     try:
         latest_review_list_with_images = paginator.page(page)
@@ -231,13 +130,14 @@ def user_review_list(request, username=None):
     except EmptyPage:
         latest_review_list_with_images = paginator.page(paginator.num_pages)
 
-    context = {'latest_review_list':latest_review_list_with_images, 'username':username, 'filter': review_filter}
+    context = {'latest_review_list':latest_review_list_with_images,
+               'username':username,
+               'filter': review_filter}
     return render(request, 'reviews/review_list.html', context)
 
+def wine_detail(request, review_id):
+    """Detail view of a single wine."""
 
-def wine_detail(request, review_id, username=None):
-    if not username:
-        username = request.user.username
     review = get_object_or_404(Review, pk=review_id)
     wine = review.wine
     image = review.wineimages.get(review=review)
