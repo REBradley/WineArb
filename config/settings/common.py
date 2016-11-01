@@ -1,12 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Django settings for WineArb project.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/dev/topics/settings/
-
-For the full list of settings and their values, see
-https://docs.djangoproject.com/en/dev/ref/settings/
+Django settings for VinArb project.
 """
 from __future__ import absolute_import, unicode_literals
 
@@ -21,7 +15,6 @@ env = environ.Env()
 # APP CONFIGURATION
 # ------------------------------------------------------------------------------
 DJANGO_APPS = (
-    # Default Django apps:
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -41,7 +34,7 @@ THIRD_PARTY_APPS = (
     'allauth.socialaccount',
 )
 
-# Apps specific for this project go here.
+# Apps specific for this project
 LOCAL_APPS = (
     'winearb.users.apps.UsersConfig',
     'winearb.reviews.apps.ReviewsConfig',
