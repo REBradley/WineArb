@@ -1,0 +1,16 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div id="servicepage">
+      {% block javascript %}
+      <script src="{% static 'react/bundle.js' %}" >
+      </script>
+      {% endblock javascript %}
+    </div>
+  </body>
+</html>
