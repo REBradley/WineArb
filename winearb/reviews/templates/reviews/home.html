@@ -4,6 +4,7 @@
 
 {% block content %}
 <div class="container-fluid m-b-1">
+  <h1>REVIEW</h1>
   <div class="form-horizontal">
     <form action="{% url 'reviews:new_review' %}" method="post" class="form" enctype="multipart/form-data">
         {% csrf_token %}

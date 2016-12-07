@@ -23,19 +23,19 @@
 
     <!-- This file stores project-specific CSS -->
     <link href="{% static 'css/project.css' %}" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Cinzel:400,700" rel="stylesheet">
+
 
     {% endblock %}
 
   </head>
 
   <body>
-    <div class="m-y-2 text-xs-center">
+    <div class="m-y-1 text-xs-center">
       <div class="container m-x-auto">
         <nav class="navbar navbar-light m-x-auto" style="background-color: rgba(255,255, 255, 0.7);">
           <div class="container-fluid m-x-auto">
             <div class="container m-x-auto">
-              <a class="navbar-brand" href="{% url 'reviews:home' %}">
+              <a class="navbar-brand" href="{% url 'articles:articles' %}">
                 <img src="{{ STATIC_URL }}images/VIN-ARB---ICON.gif" class="img-fluid m-x-auto" alt="VinArb">
               </a>
             </div>
@@ -53,28 +53,29 @@
               <ul class="nav navbar-nav m-x-auto">
                 {% if request.user.is_authenticated %}
                   <li class="nav-item">
-                    <a class="nav-link" href="{% url 'users:detail' request.user.username  %}">Welcome, {{ request.user.username }}</a>
+                    <a class="nav-link" href="{% url 'users:detail' request.user.username  %}"><p class="text-uppercase">WELCOME, {{ request.user.username }}!</p></a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{% url 'reviews:user_review_list' user.username %}">My Database</a>
+                    <a class="nav-link" href="{% url 'articles:articles' %}">HOME</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'reviews:user_review_list' user.username %}">MY REVIEWS</a>
                   </li>
 
 
 
                   <li class="nav-item">
-                    <a class="nav-link" href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a>
+                    <a class="nav-link" href="{% url 'account_logout' %}">{% trans "...SIGN OUT" %}</a>
                   </li>
                 {% else %}
                   <li class="nav-item">
-                    <a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a>
+                    <a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% trans "SIGN UP" %}</a>
                   </li>
                   <li class="nav-item">
-                    <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% trans "Sign In" %}</a>
+                    <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% trans "SIGN IN" %}</a>
                   </li>
                 {% endif %}
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'about' %}">About</a>
-                </li>
+
               </ul>
             </div>
           </div>
@@ -83,17 +84,20 @@
     </div>
 
     <div class="container">
+      <div class="jumbotron">
 
-      {% if messages %}
-          {% for message in messages %}
-              <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
-          {% endfor %}
-      {% endif %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
 
-      {% block content %}
-      {% endblock content %}
 
-    </div> <!-- /container -->
+        {% block content %}
+        {% endblock content %}
+
+      </div> <!-- /container -->
+    </div>
 
     {% block modal %}{% endblock modal %}
 

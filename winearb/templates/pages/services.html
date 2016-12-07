@@ -5,6 +5,13 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
   </head>
+  {% if request.user.is_authenticated %}
+        <input type="hidden" id="userAuth" name="authVar" value='true'>
+    {% else %}
+        <input type="hidden" id="userAuth" name="authVar" value='false'>
+  {% endif %}
+
+  <link href="{% static 'css/project.css' %}" rel="stylesheet">
   <body>
     <div id="servicepage">
       {% block javascript %}

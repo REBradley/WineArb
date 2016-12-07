@@ -19,6 +19,12 @@ var gulp = require('gulp'),
       exec = require('child_process').exec,
       runSequence = require('run-sequence'),
       browserSync = require('browser-sync').create(),
+      babelify = require('babelify'),
+      browserify = require('browserify'),
+      watchify = require('watchify'),
+      source = require('vinyl-source-stream'),
+      cache = require('gulp-cache'),
+      assign = require('lodash.assign'),
       reload = browserSync.reload;
 
 
@@ -34,13 +40,85 @@ var pathsConfig = function (appName) {
     fonts: this.app + '/static/fonts',
     images: this.app + '/static/images',
     js: this.app + '/static/js',
+    react: this.app + '/static/react',
   }
 };
 
 var paths = pathsConfig();
 
+/////////////// GULP //////////////
+gulp.task('default', function() {
+    runSequence(['imgCompression', 'watch'], 'runserver');
+});
+
+//////////////////////////////////
+////// React and JS //////////////
+//////////////////////////////////
+var customOpts = {
+  entries: [paths.react + '/js/index.js'],
+  debug: true
+};
+var opts = assign({}, watchify.args, customOpts);
+var b = watchify(browserify(opts));
+
+function bundle (bundler) {
+    return bundler
+        .on('error', gutil.log.bind(gutil, 'Browserify Error'))
+        .transform("babelify", {
+            presets: ["es2015", "react"],
+        })
+        .bundle()
+        .on('error', function (e) {
+            gutil.log(e);
+        })
+	.pipe(plumber())
+        .pipe(source('index.js'))
+        .pipe(rename('bundle.js'))
+        .pipe(gulp.dest(paths.react))
+        .pipe(browserSync.stream());
+}
+
+gulp.task('watch_react', function() {
+    var watcher = b;
+    bundle(b);
+    watcher.on('update', function () {
+        bundle(watcher);
+    });
+    watcher.on('log', gutil.log);
+
+});
+
+// Javascript minification
+gulp.task('scripts', function() {
+  return gulp.src(paths.js + '/project.js')
+    .pipe(plumber()) // Checks for errors
+    .pipe(uglify()) // Minifies the js
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(gulp.dest(paths.js));
+});
+//////////////////////////////////////////////////////////////
+
 ////////////////////////////////
-		//Tasks//
+	///// RunServer //////
+////////////////////////////////
+
+// Run django server
+gulp.task('runserver', ['scripts'], function() {
+  exec('python manage.py runserver', function (err, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+  });
+
+  browserSync.init(
+      [paths.css + "/*.css", paths.js + "*.js", paths.templates + '*.html', paths.react + "js/*.js"], {
+        proxy:  "localhost:8000",
+        logFileChanges: false
+    });
+});
+
+
+////////////////////////////////
+///// CSS and Images ////////
 ////////////////////////////////
 
 // Styles autoprefixing and minification
@@ -56,51 +134,29 @@ gulp.task('styles', function() {
     .pipe(gulp.dest(paths.css));
 });
 
-// Javascript minification
-gulp.task('scripts', function() {
-  return gulp.src(paths.js + '/project.js')
-    .pipe(plumber()) // Checks for errors
-    .pipe(uglify()) // Minifies the js
-    .pipe(rename({ suffix: '.min' }))
-    .pipe(gulp.dest(paths.js));
-});
-
 // Image compression
 gulp.task('imgCompression', function(){
   return gulp.src(paths.images + '/*')
-    .pipe(imagemin()) // Compresses PNG, JPEG, GIF and SVG images
+    .pipe(cache(imagemin({
+	    interlaced: true
+	})))
     .pipe(gulp.dest(paths.images))
 });
 
-// Run django server
-gulp.task('runServer', function() {
-  exec('python manage.py runserver', function (err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-  });
-});
-
-// Browser sync server for live reload
-gulp.task('browserSync', function() {
-    browserSync.init(
-      [paths.css + "/*.css", paths.js + "*.js", paths.templates + '*.html'], {
-        proxy:  "localhost:8000"
-    });
-});
-
-// Default task
-gulp.task('default', function() {
-    runSequence(['styles', 'scripts', 'imgCompression'], 'runServer', 'browserSync');
-});
 
 ////////////////////////////////
 		//Watch//
 ////////////////////////////////
 
-// Watch
-gulp.task('watch', ['default'], function() {
+exec('jest --watch', function (err, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+    });
 
-  gulp.watch(paths.sass + '/*.scss', ['styles']);
+// Watch
+gulp.task('watch', ['watch_react'], function() {
+
+  gulp.watch(paths.sass + '/*.scss', ['styles']).on("change", reload);
   gulp.watch(paths.js + '/*.js', ['scripts']).on("change", reload);
   gulp.watch(paths.images + '/*', ['imgCompression']);
   gulp.watch(paths.templates + '/**/*.html').on("change", reload);

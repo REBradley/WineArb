@@ -68,3 +68,12 @@ class WineImage(BasicImage):
                                related_name='wineimages')
     def get_upload_path(self, filename):
         return "bottle_shots/%s" % filename
+
+
+class ArticleImage(BasicImage):
+    """Defines an Article image.
+    It is just like a basic image, but prepends a path that directs it to the proper folder.
+    """
+
+    def get_upload_path(self, filename):
+        return "article_images/%s" % filename

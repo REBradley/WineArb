@@ -19,7 +19,7 @@ from .common import *  # noqa
 DEBUG = env.bool('DJANGO_DEBUG', default=True)
 TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
 
-# SECRET CONFIGURATION
+# SECRET CONFIGURATION DJANGO
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 # Note: This key only used for development and testing.
@@ -32,7 +32,7 @@ EMAIL_PORT = 1025
 
 EMAIL_HOST = 'localhost'
 EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND',
-                    default='django.core.mail.backends.console.EmailBackend')
+                    default='django.core.mail.backends.smtp.EmailBackend')
 
 
 # CACHING
@@ -70,5 +70,8 @@ INSTALLED_APPS += ('django_extensions', )
 # ------------------------------------------------------------------------------
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
-# Your local stuff: Below this line define 3rd party library settings
+
+# LOCAL CONFIGURATION - STRIPE
 # ------------------------------------------------------------------------------
+STRIPE_SECRET_KEY = 'sk_test_A8VqBi3Vuae0RQRldvUp9G9N' #Test
+STRIPE_PUBLIC_KEY = 'pk_test_9JoLcmNtPj8Kanua3vLS0Y7s' #Test

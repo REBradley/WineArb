@@ -35,6 +35,19 @@ urlpatterns = [
         regex=r'^reviews/',
         view=include('winearb.reviews.urls', namespace="reviews")
     ),
+    url(
+        regex=r'^articles/',
+        view=include('winearb.articles.urls', namespace="articles")
+    ),
+    url(
+        regex=r'^industry/',
+        view=TemplateView.as_view(template_name='pages/services.html'),
+        name='industry'
+    ),
+    url(
+        regex=r'^payments/',
+        view=include('djstripe.urls', namespace="djstripe")
+    ),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

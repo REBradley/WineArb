@@ -18,13 +18,9 @@ django-model-utils==2.6
 # Images
 Pillow==3.4.1
 
-# For user registration, either via email or social
-# Well-built with regular release cycles!
+# For user registration
 django-allauth==0.27.0
 
-
-# Python-PostgreSQL Database Adapter
-#psycopg2==2.6.2
 
 # Unicode slugification
 awesome-slugify==1.6.5
@@ -37,11 +33,12 @@ django-redis==4.5.0
 redis>=2.10.5
 
 
-
-
-
-# Your custom requirements go here
+# Custom requirements
 python-dateutil==2.5.3
 six==1.10.0
 mysqlclient==1.3.9
 django-filter==0.15.3
+django-tinymce==2.4.0
+djangorestframework==3.5.3
+git://github.com/kavdev/dj-stripe.git@1.0.0#egg=dj-stripe
+mock-django==0.6.10

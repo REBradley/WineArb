@@ -1,4 +1,4 @@
-/* Project specific Javascript goes here. */
+///* Project specific Javascript goes here. */
 
 /*
 Formatting hack to get around crispy-forms unfortunate hardcoding

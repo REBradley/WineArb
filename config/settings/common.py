@@ -32,6 +32,9 @@ THIRD_PARTY_APPS = (
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'tinymce',
+    'rest_framework',
+    'djstripe',
 )
 
 # Apps specific for this project
@@ -39,6 +42,7 @@ LOCAL_APPS = (
     'winearb.users.apps.UsersConfig',
     'winearb.reviews.apps.ReviewsConfig',
     'winearb.upload_handling.apps.UploadHandlingConfig',
+    'winearb.articles.apps.ArticlesConfig'
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -135,7 +139,6 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
-                # custom template context processors go here
             ],
         },
     },
@@ -220,3 +223,14 @@ AUTOSLUG_SLUGIFY_FUNCTION = 'slugify.slugify'
 
 ADMIN_URL = r'^admin/'
 
+
+# TINYMCE
+# ------------------------------------------------------------------------------
+TINYMCE_DEFAULT_CONFIG = {
+    'plugins': "table,paste,searchreplace",
+    'theme': "advanced",
+    'cleanup_on_startup': True,
+    'custom_undo_redo_levels': 10,
+}
+TINYMCE_SPELLCHECKER = True
+TINYMCE_COMPRESSOR = True

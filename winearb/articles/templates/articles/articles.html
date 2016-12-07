@@ -1,0 +1,27 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+    {% autoescape off %}
+      <input type="hidden" id="articleData" name="variable" value='{{ data|safe }}'>
+    {% endautoescape %}
+    {% if request.user.is_authenticated %}
+        <input type="hidden" id="userAuth" name="authVar" value='true'>
+    {% else %}
+        <input type="hidden" id="userAuth" name="authVar" value='false'>
+    {% endif %}
+
+    <link href="{% static 'css/project.css' %}" rel="stylesheet">
+  </head>
+
+  <body>
+    <div id="root" style="text-align: center">
+      {% block javascript %}
+      <script src="{% static 'react/bundle.js' %}" >
+      </script>
+      {% endblock javascript %}
+    </div>
+  </body>
+</html>
