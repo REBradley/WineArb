@@ -31,8 +31,8 @@ try {
             <Grid fluid={true}>
                 <div>
                     <Base userAuth={userAuth}/>
-                    <Services main_title="Modern Email" sub_title="Engage your customers." label="Purchase" link="/payments/subscribe/" />
                     <Services main_title="Web App" sub_title="Be with your customers, always." label="Purchase" link="/payments/subscribe/" />
+                    <Services main_title="Modern Email" sub_title="Engage your customers." label="Purchase" link="/payments/subscribe/" />
                 </div>
             </Grid>,
           document.getElementById('servicepage')

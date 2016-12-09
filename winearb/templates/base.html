@@ -29,10 +29,10 @@
 
   </head>
 
-  <body>
+  <body style="background-color: #f0fff0">
     <div class="m-y-1 text-xs-center">
       <div class="container m-x-auto">
-        <nav class="navbar navbar-light m-x-auto" style="background-color: rgba(255,255, 255, 0.7);">
+        <nav class="navbar navbar-light m-x-auto" style="background-color: #f0fff0">
           <div class="container-fluid m-x-auto">
             <div class="container m-x-auto">
               <a class="navbar-brand" href="{% url 'articles:articles' %}">
@@ -53,13 +53,13 @@
               <ul class="nav navbar-nav m-x-auto">
                 {% if request.user.is_authenticated %}
                   <li class="nav-item">
-                    <a class="nav-link" href="{% url 'users:detail' request.user.username  %}"><p class="text-uppercase">WELCOME, {{ request.user.username }}!</p></a>
+                    <a class="nav-link" href="{% url 'djstripe:account'  %}"><p class="text-uppercase">WELCOME, {{ request.user.username }}!</p></a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="{% url 'articles:articles' %}">HOME</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{% url 'reviews:user_review_list' user.username %}">MY REVIEWS</a>
+                    <a class="nav-link" href="/industry/">PRODUCTS</a>
                   </li>
 
 

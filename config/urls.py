@@ -10,8 +10,8 @@ from django.views import defaults as default_views
 
 urlpatterns = [
     url(
-        regex=r'^$',
-        view=TemplateView.as_view(template_name='homepage.html'),
+        regex=r'^',
+        view=include('winearb.articles.urls', namespace="articles"),
         name='homepage'
     ),
     url(

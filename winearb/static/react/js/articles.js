@@ -42,7 +42,7 @@ function CustomJTron(ShowWrappedComponent, ToggleWrappedComponent) {
                                 </div>
                                 <ButtonGroup vertical block>
                                     <Button bsSize="xsmall" onClick={this.handleClick}>
-                                        {isClicked ? 'See Below, Close Here After Viewing' : 'View Content'}
+                                        {isClicked ? 'See Content Below, Close Here After Viewing' : 'View Content'}
                                     </Button>
                                 </ButtonGroup>
                             </div>
