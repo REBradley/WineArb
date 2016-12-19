@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import Col from 'react-bootstrap/lib/Col';
 import Jumbotron from 'react-bootstrap/lib/Jumbotron';
 import Image from 'react-bootstrap/lib/Image';
 import Button from 'react-bootstrap/lib/Button';
@@ -33,18 +34,20 @@ function CustomJTron(ShowWrappedComponent, ToggleWrappedComponent) {
             render() {
                 const isClicked = this.state.isClicked;
                 return(
-                <div>
+                <Col xs={12} md={8} mdOffset={2}>
                     <div>
                         <Jumbotron style={{backgroundColor: '#FFFFF0', float: 'center', padding: 'none', border: 'outset black'}}>
                             <div className="JumbotronItem" style={{textAlign: 'center'}}>
                                 <div>
                                     <ShowWrappedComponent {...this.props} />
                                 </div>
-                                <ButtonGroup vertical block>
-                                    <Button bsSize="xsmall" onClick={this.handleClick}>
-                                        {isClicked ? 'See Content Below, Close Here After Viewing' : 'View Content'}
-                                    </Button>
-                                </ButtonGroup>
+                                    <ButtonGroup vertical block>
+                                        <Col md={6} mdOffset={3}>
+                                            <Button bsSize="xsmall" onClick={this.handleClick}>
+                                                {isClicked ? 'Close' : 'View Content'}
+                                            </Button>
+                                        </Col>
+                                    </ButtonGroup>
                             </div>
                         </Jumbotron>
                     </div>
@@ -53,13 +56,14 @@ function CustomJTron(ShowWrappedComponent, ToggleWrappedComponent) {
                             <Jumbotron style={{backgroundColor: '#FFFFF0', float: 'center', padding: 'none', border: 'outset black'}}>
                                 <div className="JumbotronItem" style={{textAlign: 'center'}}>
                                     <div>
-                                       <ToggleWrappedComponent {...this.props} />
+                                        {this.props.children}
+                                        <ToggleWrappedComponent {...this.props} />
                                     </div>
                                 </div>
                             </Jumbotron>
                         </Fade>
                     </div>
-                </div>
+                </Col>
                 );
             }
     }

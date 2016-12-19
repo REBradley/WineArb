@@ -104,6 +104,14 @@
     margin-top: 3px;
 }
 
+.body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+
+.form > .a {
+  margin: 3px;
+}
+
 
 
 /* Display django-debug-toolbar.

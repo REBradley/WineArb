@@ -8,7 +8,7 @@ import { Base } from './home.js';
 
 import { CustomJTron } from './articles.js';
 import Title from './components/title.js';
-import { Services } from './services.js';
+import { Services, WebAppCopy, EmailCopy } from './services.js';
 
 
 const userAuth = document.getElementById("userAuth").value;
@@ -31,8 +31,12 @@ try {
             <Grid fluid={true}>
                 <div>
                     <Base userAuth={userAuth}/>
-                    <Services main_title="Web App" sub_title="Be with your customers, always." label="Purchase" link="/payments/subscribe/" />
-                    <Services main_title="Modern Email" sub_title="Engage your customers." label="Purchase" link="/payments/subscribe/" />
+                    <Services main_title="Web App" sub_title="Be with your customers, always." label="Purchase" link="/payments/subscribe/">
+                        {WebAppCopy}
+                    </Services>
+                    <Services main_title="Modern Email" sub_title="Engage your customers." label="Purchase" link="/payments/subscribe/">
+                        {EmailCopy}
+                    </Services>
                 </div>
             </Grid>,
           document.getElementById('servicepage')

@@ -17,11 +17,14 @@ const Base = (props) => {
                         <div>
                             <a href="/articles/"><Image responsive src="/static/images/VIN-ARB.gif" alt="VinArb" style={{display: 'inline'}}/></a>
                         </div>
-                            <Nav style={{width: '75%', padding: 'none', display: 'inline-block', float: 'center'}}>
-                                <NavItem eventKey={1} href="/industry/" style={{float: 'center', padding: 'none', display: 'inline-block'}}>MARKETING</NavItem>
-                                <NavItem eventKey={2} href="/articles/" style={{float: 'left', padding: 'none', display: 'inline-block'}}>HOME</NavItem>
-                                <NavItem eventKey={3} href="/accounts/signup/" style={{float: 'right', padding: 'none', display: 'inline-block'}}>REGISTER</NavItem>
-                            </Nav>
+                            <Navbar.Collapse>
+                                <Nav style={{width: '75%', padding: 'none', display: 'inline-block', float: 'center'}}>
+                                    <NavItem eventKey={1} href="/articles/" style={{ float: 'none', padding: 'none', display: 'inline-block'}}>HOME</NavItem>
+                                    <NavItem eventKey={2} href="/industry/" style={{ float: 'none', padding: 'none', display: 'inline-block'}}>TECHNOLOGY</NavItem>
+                                    <NavItem eventKey={3} href="/accounts/signup/" style={{ float: 'none', padding: 'none', display: 'inline-block'}}>REGISTER</NavItem>
+                                    <NavItem eventKey={4} href="/accounts/login/" style={{ float: 'none', padding: 'none', display: 'inline-block'}}>SIGN IN</NavItem>
+                                </Nav>
+                            </Navbar.Collapse>
                         </Navbar>
                     </div>
                 </Grid>
@@ -35,10 +38,10 @@ const Base = (props) => {
                         <a href="/articles/"><Image responsive src="/static/images/VIN-ARB.gif" alt="VinArb" style={{display: 'inline'}}/></a>
                     </div>
                         <Nav style={{width: '100%', padding: 'none', display: 'inline-block', float: 'center'}}>
-                            <NavItem eventKey={1} href="/industry/" style={{float: 'right', padding: 'none', display: 'inline-block'}}>MARKETING</NavItem>
-                            <NavItem eventKey={2} href="/articles/" style={{float: 'left', padding: 'none', display: 'inline-block'}}>HOME</NavItem>
-                            <NavItem eventKey={3} href="/payments/" style={{float: 'center', padding: 'none', display: 'inline-block'}}>ACCOUNT</NavItem>
-                            <NavItem eventKey={4} href="/reviews/" style={{float: 'center', padding: 'none', display: 'inline-block'}}>REVIEWS</NavItem>
+                            <NavItem eventKey={1} href="/articles/" style={{ float: 'none', padding: 'none', display: 'inline-block'}}>HOME</NavItem>
+                            <NavItem eventKey={2} href="/industry/" style={{ float: 'none', padding: 'none', display: 'inline-block'}}>TECHNOLOGY</NavItem>
+                            <NavItem eventKey={3} href="/payments/" style={{ float: 'none', padding: 'none', display: 'inline-block'}}>ACCOUNT</NavItem>
+                            <NavItem eventKey={4} href="/accounts/logout/" style={{ padding: 'none', display: 'inline-block'}}>...SIGN OUT</NavItem>
                         </Nav>
                     </Navbar>
                 </div>

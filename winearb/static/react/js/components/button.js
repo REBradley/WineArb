@@ -13,4 +13,18 @@ const LinkButton = (props) => {
     );
 }
 
+const LinkButtonAdder = (Component, props) => {
+    const Btn = LinkButton(props)
+    return (
+        <div className="ComponentWithLink">
+            <div>
+                <Component />
+            </div>
+            <div>
+                { Btn }
+            </div>
+        </div>
+    );
+}
+
 export default LinkButton;
