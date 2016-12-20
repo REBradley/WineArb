@@ -92,19 +92,19 @@
     </div>
 
     <div class="container">
-      <div class=" col-xs-12 col-md-8 offset-md-2">
+      <div class="col-md-8 offset-md-2">
         <div class="jumbotron">
-  
+
           {% if messages %}
               {% for message in messages %}
                   <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
               {% endfor %}
           {% endif %}
-  
-  
+
+
           {% block content %}
           {% endblock content %}
-  
+
         </div> <!-- /container -->
       </div>
     </div>
