@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Grid from 'react-bootstrap/lib/Grid';
+import Col from 'react-bootstrap/lib/Col';
 
 import { ArticleList } from './article_list.js';
 import { Base } from './home.js';
@@ -18,10 +19,10 @@ try {
 
     ReactDOM.render(
         <Grid fluid={true}>
-            <div>
+            <Col xs={12} lg={8} lgOffset={2} >
                 <Base userAuth={userAuth}/>
                 <ArticleList articles={articleData}/>
-            </div>
+            </Col>
         </Grid>,
       document.getElementById('root')
     );
@@ -29,7 +30,7 @@ try {
 
         ReactDOM.render(
             <Grid fluid={true}>
-                <div>
+                <Col xs={12} lg={8} lgOffset={2} >
                     <Base userAuth={userAuth}/>
                     <Services main_title="Web App" sub_title="Be with your customers, always." label="Purchase" link="/payments/subscribe/">
                         {WebAppCopy}
@@ -37,7 +38,7 @@ try {
                     <Services main_title="Modern Email" sub_title="Engage your customers." label="Purchase" link="/payments/subscribe/">
                         {EmailCopy}
                     </Services>
-                </div>
+                </Col>
             </Grid>,
           document.getElementById('servicepage')
         );

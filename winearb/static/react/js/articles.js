@@ -34,7 +34,7 @@ function CustomJTron(ShowWrappedComponent, ToggleWrappedComponent) {
             render() {
                 const isClicked = this.state.isClicked;
                 return(
-                <Col xs={12} md={8} mdOffset={2}>
+                <Col>
                     <div>
                         <Jumbotron style={{backgroundColor: '#FFFFF0', float: 'center', padding: 'none', border: 'outset black'}}>
                             <div className="JumbotronItem" style={{textAlign: 'center'}}>

@@ -15,10 +15,10 @@ const Base = (props) => {
                     <div>
                         <Navbar style={{textAlign: 'center', backgroundColor: 'transparent', border: 'None'}}>
                             <Navbar.Header>
-                                <div>
-                                    <a href="/articles/"><Image responsive src="/static/images/VIN-ARB.gif" alt="VinArb" style={{display: 'inline'}}/></a>
-                                </div>
-                                <Navbar.Toggle />
+                                <Navbar.Brand>
+                                    <a href="/articles/"><Image responsive src="/static/images/VIN-ARB.gif" alt="VinArb" style={{display: 'block'}}/></a>
+                                </Navbar.Brand>
+                                <Navbar.Toggle style={{ borderColor: '#000000', border: 'none', float: 'center', margin: 'none'}} />
                             </Navbar.Header>
                             <Navbar.Collapse>
                                 <Nav style={{width: '100%', padding: 'none', display: 'inline-block', float: 'center'}}>
@@ -38,10 +38,10 @@ const Base = (props) => {
                 <div>
                     <Navbar style={{textAlign: 'center', backgroundColor: 'transparent', border: 'None'}}>
                         <Navbar.Header>
-                            <div>
-                                <a href="/articles/"><Image responsive src="/static/images/VIN-ARB.gif" alt="VinArb" style={{display: 'inline'}}/></a>
-                            </div>
-                            <Navbar.Toggle />
+                            <Navbar.Brand>
+                                <a href="/articles/"><Image responsive src="/static/images/VIN-ARB.gif" alt="VinArb" style={{display: 'block'}}/></a>
+                            </Navbar.Brand>
+                            <Navbar.Toggle style={{ borderColor: '#000000', border: 'none', float: 'center', margin: 'none'}} />
                         </Navbar.Header>
                         <Navbar.Collapse>
                             <Nav style={{width: '100%', padding: 'none', display: 'inline-block', float: 'center'}}>
