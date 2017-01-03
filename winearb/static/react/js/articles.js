@@ -13,6 +13,7 @@ import Title from "./components/title.js";
 import { Username } from "./components/username.js";
 import { Date } from "./components/date.js";
 import Text from "./components/text.js";
+import InnerHTML from "./components/innerhtml.js";
 
 
 function CustomJTron(ShowWrappedComponent, ToggleWrappedComponent) {
@@ -80,6 +81,6 @@ const ArticleHeading = (props) => {
             );
 };
 
-const Article = CustomJTron(ArticleHeading, Text);
+const Article = CustomJTron(ArticleHeading, InnerHTML);
 
 export { Article, CustomJTron };

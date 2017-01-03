@@ -48,6 +48,10 @@ urlpatterns = [
         regex=r'^payments/',
         view=include('djstripe.urls', namespace="djstripe")
     ),
+    url(
+        regex=r'^tinymce/',
+        view=include('tinymce.urls')
+    ),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -62,8 +62,58 @@ const Email = (
     </div>
 );
 
+const WineList = (
+    <div>
+        <h3>Summary:</h3>
+        <p>
+            Whether you have 1 or 100 pages of wines to sell, allowing your customers to easily navigate your offerings
+            should be your top priority. Often times website designers fail to deliver an easy to scan, fully informative
+            list of your wines. Or worse yet, you still use a pdf to show your stuff online. It no lomger has to be this
+            way... use the wine list made by a wine professional, for wine professionals and their customers.
+        </p>
+        <h3>Features:</h3>
+        <ul>
+            <li>Attractive, scannable wine listings</li>
+            <li>Full information including abv, grape(s), region, price</li>
+            <li>VinArb updates the list for you</li>
+        </ul>
+        <h3>Ultimately:</h3>
+        <ul>
+            <li>Provide your customers with the best way to explore your list</li>
+            <li>Forget about updating your online wine list</li>
+            <li>Forget about updating your wine list and save on paper waste</li>
+        </ul>
+    </div>
+);
+
+const Review = (
+    <div>
+        <h3>Summary:</h3>
+        <p>
+            Keep track of all the wines you try. VinArb provides a free wine review app for all members.
+        </p>
+        <h3>Features:</h3>
+        <ul>
+            <li>Easily and quickly add reviews</li>
+            <li>Grape, Region, Producer and other information is added for you</li>
+            <li>Filter by score</li>
+            <li>All of your images are stored in the cloud with Amazon Web Services</li>
+        </ul>
+        <h3>Ultimately:</h3>
+        <ul>
+            <li>Remember what you like</li>
+            <li>Practice your wine description skills</li>
+            <li>Learn about wine</li>
+        </ul>
+    </div>
+);
+
 const EmailCopy = <Text text={Email} />
 
 const WebAppCopy = <Text text={AppCopy} />
 
-export { Services, WebAppCopy, EmailCopy };
+const ReviewCopy = <Text text={Review} />
+
+const WineListCopy = <Text text={WineList} />
+
+export { Services, WebAppCopy, EmailCopy, ReviewCopy, WineListCopy };

@@ -43,6 +43,7 @@
 
 .navbar-brand {
     float:none;
+    padding: 0 !important;
 }
 
 .navbar-header {

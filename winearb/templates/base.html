@@ -61,6 +61,13 @@
                   <li class="nav-item">
                     <a class="nav-link" href="/industry/">TECHNOLOGY</a>
                   </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="supportedContentDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">REVIEWS</a>
+                    <div class="dropdown-menu" aria-labelledby="supportedContentDropdown">
+                      <a class="dropdown-item" href="{% url 'reviews:home' %}">ADD REVIEW</a>
+                      <a class="dropdown-item" href="{% url 'reviews:user_review_list' user.username %}">MY REVIEWS</a>
+                    </div>
+                  </li>
                   <li class="nav-item">
                     <a class="nav-link" href="/payments/">ACCOUNT</a>
                   </li>
@@ -75,6 +82,13 @@
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="/industry/">TECHNOLOGY</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="supportedContentDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">REVIEWS</a>
+                    <div class="dropdown-menu" aria-labelledby="supportedContentDropdown">
+                      <a class="dropdown-item" href="{% url 'reviews:home' %}">ADD REVIEW</a>
+                      <a class="dropdown-item" href="/accounts/signup">MY REVIEWS</a>
+                    </div>
                   </li>
                   <li class="nav-item">
                     <a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% trans "REGISTER" %}</a>

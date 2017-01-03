@@ -9,7 +9,7 @@ import { Base } from './home.js';
 
 import { CustomJTron } from './articles.js';
 import Title from './components/title.js';
-import { Services, WebAppCopy, EmailCopy } from './services.js';
+import { Services, WebAppCopy, EmailCopy, ReviewCopy, WineListCopy } from './services.js';
 
 
 const userAuth = document.getElementById("userAuth").value;
@@ -35,8 +35,14 @@ try {
                     <Services main_title="Web App" sub_title="Be with your customers, always." label="Purchase" link="/payments/subscribe/">
                         {WebAppCopy}
                     </Services>
-                    <Services main_title="Modern Email" sub_title="Engage your customers." label="Purchase" link="/payments/subscribe/">
+                    <Services main_title="Email Marketing" sub_title="Engage your customers." label="Purchase" link="/payments/subscribe/">
                         {EmailCopy}
+                    </Services>
+                    <Services main_title="Wine List" sub_title="The modern way to sell wine." label="Purchase" link="/payments/subscribe/">
+                        {WineListCopy}
+                    </Services>
+                    <Services main_title="Wine Reviews" sub_title="Remember your wines." label="Free!" link="/reviews/">
+                        {ReviewCopy}
                     </Services>
                 </Col>
             </Grid>,

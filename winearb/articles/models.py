@@ -2,6 +2,8 @@ from __future__ import unicode_literals
 
 from django.db import models
 
+from tinymce.models import HTMLField
+
 from ..upload_handling.models import ArticleImage
 
 class Article(models.Model):
@@ -11,7 +13,7 @@ class Article(models.Model):
     author = models.CharField(max_length=255, default='Robert Bradley')
     image = models.ForeignKey(ArticleImage)
     date = models.CharField(max_length=40)
-    text = models.TextField()
+    text = HTMLField()
 
     class Meta:
         verbose_name = 'Article'
