@@ -73,7 +73,7 @@ function CustomJTron(ShowWrappedComponent, ToggleWrappedComponent) {
 const ArticleHeading = (props) => {
             return(
             <div>
-                <Image src={props.image} />
+                <Image  style={{ display: 'inline-block' }}src={props.image} responsive />
                 <Title main_title={props.main_title} sub_title={props.sub_title} />
                 <Username username={props.author} />
                 <Date date={props.date} />
