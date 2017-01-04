@@ -54,7 +54,7 @@ function CustomJTron(ShowWrappedComponent, ToggleWrappedComponent) {
                     </div>
                     <div>
                         <Fade in={isClicked} unmountOnExit={true} timeout={1000}>
-                            <Jumbotron style={{backgroundColor: '#FFFFF0', float: 'center', padding: 'none', border: 'outset black'}}>
+                            <Jumbotron style={{backgroundColor: '#FFFFF0', float: 'center', padding: 'none', border: 'outset black', marginTop: '0px'}}>
                                 <div className="JumbotronItem" style={{textAlign: 'center'}}>
                                     <div>
                                         {this.props.children}
