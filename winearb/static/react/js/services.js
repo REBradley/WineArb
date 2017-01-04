@@ -30,6 +30,10 @@ const AppCopy = (
             <li>Easily launch new profit centers</li>
             <li>Increase ROI on existing ones</li>
         </ul>
+        <h3>Demos:</h3>
+        <ul>
+            <li><a href="https://vinarb.herokuapp.com">Featured wine + wine and beer lists</a></li>
+        </ul>
     </div>
 );
 
